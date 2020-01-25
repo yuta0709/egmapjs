@@ -27,7 +27,7 @@ window.onload = function() {
 		select ?uri ?name ?lat ?lng {
 			?uri ic:名称 [ ic:表記 ?name ].
 			?uri ic:地理座標 [ ic:緯度 ?lat; ic:経度 ?lng; ].
-			filter(contains(str(?name),'鯖江'))
+			filter(contains(str(?name),'駐車場'))
 		} limit 100
 	`
 
@@ -38,7 +38,7 @@ window.onload = function() {
 			var lat = item.lat.value
 			var lng = item.lng.value
 			var name = item.name.value
-			map.addIcon(lat, lng, name)
+			map.addIcon(lat, lng, name,"icon/carparking.png",64,64)
 		}
 	})
 
