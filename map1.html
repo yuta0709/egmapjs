@@ -17,7 +17,8 @@ window.onload = function() {
 	var map = initMap('mapid')
 	map.setZoom(4)
 	map.panTo([ 35.943560,136.188917 ]) // 鯖江駅
-		var query = `
+		// SPARQLクエリー
+	var query = `
 		prefix ic: <http://imi.go.jp/ns/core/rdf#>
 		prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 		select ?uri ?name ?lat ?lng {
@@ -36,7 +37,7 @@ window.onload = function() {
 			var name = item.name.value
 			map.addIcon(lat, lng, name,"icon/carparking.png",64,64)
 		}
-	}
+	})
 }
 
 </script>
