@@ -17,6 +17,26 @@ window.onload = function() {
 	var map = initMap('mapid')
 	map.setZoom(4)
 	map.panTo([ 35.943560,136.188917 ]) // 鯖江駅
+		var query = `
+		prefix ic: <http://imi.go.jp/ns/core/rdf#>
+		prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+		select ?uri ?name ?lat ?lng {
+			?uri ic:名称 [ ic:表記 ?name ].
+			?uri ic:地理座標 [ ic:緯度 ?lat; ic:経度 ?lng; ].
+			filter(contains(str(?name),'駐車場'))
+		} limit 100
+	`
+
+	querySPARQL(query, function(data) {
+		var items = data.results.bindings
+		for (var i = 0; i < items.length; i++) {
+			var item = items[i]
+			var lat = item.lat.value
+			var lng = item.lng.value
+			var name = item.name.value
+			map.addIcon(lat, lng, name,"icon/carparking.png",64,64)
+		}
+	}
 }
 
 </script>
